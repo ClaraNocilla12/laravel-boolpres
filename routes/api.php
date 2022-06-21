@@ -18,16 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/test', function(){
-    $name = ['Pinco', 'Pallino'];
-
-    return response()->json( compact('name'));
-});
 
 
 
 Route::namespace('Api')->group( function(){
         Route::get('/posts', 'PostController@index');
+        Route::get('/posts/{id}', 'PostController@show');
 
 });
 

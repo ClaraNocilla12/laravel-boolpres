@@ -3,34 +3,41 @@
     <Loader v-if="isLoading" />
 
     <div v-if="posts.length">
+      <!-- <div class="d-flex justify-content-center">
       <Pagination :pagination="pagination"/>
-
+      </div> -->
  
       <div class="container">
-        <div class="card text-center" v-for="post in posts" :key="post.id">
+        <div class="card text-center mb-3" v-for="post in posts" :key="post.id">
           <div class="card-header">
             {{ post.title }} -
             <!-- {{post.category.label}} -->
+
           </div>
-          <div class="card-body">
+          <div class="card-body ">
             <p class="card-title">
               <span
                 v-for="tag in post.tags"
                 :key="tag.id"
-                class="badge"
+                class="badge m-1"
                 :style="`background-color: ${tag.color}`"
                 >{{ tag.label }}</span
               >
             </p>
             <p class="card-text">{{ post.content }}</p>
           </div>
-          <div class="card-footer text-muted">2 days ago</div>
+          <router-link :to="{ name: 'post-detail', params: { id: post.id } }">Details</router-link>
+          <div class="card-footer text-muted">{{post.updated_at}}</div>
         </div>
       </div>
       
     </div>
     <p v-else>Non ci sono post</p>
+    <div class="d-flex justify-content-center">
+      <Pagination :pagination="pagination"/>
+      </div>
   </div>
+    
 </template>
 
 <script>

@@ -7,10 +7,10 @@
             <div class="col-md-8">
              
               
-                    
+                    <router-view></router-view>
 
                    
-                        <PostList/>
+                        <!-- <PostList/> -->
                    
                 
             </div>
@@ -23,6 +23,7 @@
 <script>
     import Header from './Header.vue';
     import PostList from './posts/PostList.vue';
+    
     export default{
         name: "App",
         components: {

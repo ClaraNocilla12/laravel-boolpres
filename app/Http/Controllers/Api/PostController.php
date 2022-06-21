@@ -50,7 +50,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::with('Category', 'tags')->find($id);
+        return response()->json( $post );
     }
 
     /**
