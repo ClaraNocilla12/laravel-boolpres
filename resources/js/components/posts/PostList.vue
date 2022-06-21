@@ -24,9 +24,9 @@
                 >{{ tag.label }}</span
               >
             </p>
-            <p class="card-text">{{ post.content }}</p>
+            <p class="card-text"><router-link :to="{ name: 'post-detail', params: { slug: post.slug } }">Details</router-link></p>
           </div>
-          <router-link :to="{ name: 'post-detail', params: { id: post.id } }">Details</router-link>
+          
           <div class="card-footer text-muted">{{post.updated_at}}</div>
         </div>
       </div>
@@ -34,7 +34,7 @@
     </div>
     <p v-else>Non ci sono post</p>
     <div class="d-flex justify-content-center">
-      <Pagination :pagination="pagination"/>
+      <Pagination :pagination="pagination" @on-page-change="getPosts"/>
       </div>
   </div>
     
@@ -59,9 +59,9 @@ export default {
     };
   },
   methods: {
-    getPosts() {
+    getPosts(page = 1) {
       axios
-        .get("http://127.0.0.1:8000/api/posts")
+        .get("http://127.0.0.1:8000/api/posts?page=" + page)
         .then((res) => {
           const { data, current_page, last_page } = res.data.posts;
 

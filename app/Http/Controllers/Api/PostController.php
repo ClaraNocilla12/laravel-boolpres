@@ -48,9 +48,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $post = Post::with('Category', 'tags')->find($id);
+     $post = Post::where('slug', $slug)->with( ['Category','tags'] )->first();
+        if ( !$post ) return response('Post not found', 404);
         return response()->json( $post );
     }
 
